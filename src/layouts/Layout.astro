@@ -1,22 +1,49 @@
+---
+import { siteInfo } from "@/consts/site-info";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title?: string;
+  image?: string;
+  description?: string;
+}
+
+const {
+  title = siteInfo.title,
+  description = siteInfo.description,
+  image,
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <!-- SEO -->
+    <meta name="description" content={description} />
+    <meta name="author" content="David" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <ClientRouter />
+
+    <!-- <style>
+      @view-transition {
+        navigation: auto; /* enabled! */
+      }
+    </style> -->
+  </head>
+  <body class="bg-slate-800 text-slate-100 m-auto max-w-3xl">
+    <main class="mt-10">
+      <slot />
+    </main>
+  </body>
+</html>
