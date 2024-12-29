@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Title from "@/components/shared/Title.astro";
+import { FavoritePokemons } from "@/components/pokemons/FavoritePokemons";
+
+const counterValue = 20;
+---
+
+<Layout title="Pokemon Static | Favoritos">
+  <Title>Favoritos</Title>
+
+  <FavoritePokemons client:only="solid-js" />
+</Layout>
